@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Time Tracker</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <link id="favicon" rel="shortcut icon" type="image/png" href="pause.png">
+</head>
+<body>
+
+<div id="app">
+    <input class="new-timer" autocomplete="off" v-model="newTimer" @keyup.enter="addTimer">
+    <ul class="timers" v-cloak>
+        <li v-for="timer in timers" :class="{ active: timer.active, editing: timer == editedTimer }" @click="clickTimer(timer)">
+            <div class="view">
+                <label @dblclick="editTimer(timer)">{{ timer.name }}</label>
+                <button class="delete" @click.stop="removeTimer(timer)"></button>
+                <span class="time">{{ timer.text }}</span>
+            </div>
+            <input type="text" class="edit"
+                   v-model="timer.name"
+                   v-timer-focus="timer == editedTimer"
+                   @blur="doneEdit(timer)"
+                   @keyup.enter="doneEdit(timer)"
+                   @keyup.esc="cancelEdit(timer)">
+        </li>
+    </ul>
+</div>
+
+<script src="https://unpkg.com/vue@2.1.9/dist/vue.min.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>

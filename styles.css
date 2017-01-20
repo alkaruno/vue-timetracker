@@ -1,0 +1,129 @@
+*, *:before, *:after {
+    box-sizing: border-box;
+    outline: none;
+}
+
+body, html {
+    overflow: hidden;
+}
+
+body, input {
+    font-family: Roboto, Roboto, sans-serif;
+    font-size: 24px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    width: 960px;
+    margin: 30px auto;
+}
+
+.timers {
+    list-style: none;
+    padding: 0;
+}
+
+.timers li {
+    padding: 10px 20px;
+    position: relative;
+    background: #ffffff;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+.timers li * {
+    cursor: pointer;
+}
+
+.timers li:last-child {
+    border-bottom: none;
+}
+
+.timers li:hover {
+    background-color: #f5f5f5;
+    transition: color 0.2s ease-out;
+}
+
+.timers li span {
+    float: right;
+    padding-right: 20px;
+}
+
+.timers li.active {
+    background-color: #e6ffe6;
+    transition: color 0.2s ease-out;
+}
+
+input {
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    width: 100%;
+}
+
+/* edit */
+
+.timers li .edit {
+    display: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+.timers li.editing:last-child {
+    margin-bottom: -1px;
+}
+
+.timers li.editing {
+    border-bottom: none;
+    padding: 0;
+}
+
+.timers li.editing .edit {
+    display: block;
+    width: 500px;
+    padding: 10px 20px;
+}
+
+.timers li.editing .view {
+    display: none;
+}
+
+/* /edit */
+
+/* delete */
+
+.timers li .delete {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 40px;
+    height: 40px;
+    font-size: 40px;
+    line-height: 40px;
+    color: #ff9999;
+    margin: auto 0 11px;
+    transition: color 0.2s ease-out;
+    border: none;
+    background-color: transparent;
+}
+
+.timers li .delete:hover {
+    color: #ff0000;
+}
+
+.timers li .delete:after {
+    content: '×';
+}
+
+.timers li:hover .delete {
+    display: block;
+}
+
+/* /delete */
+
+[v-cloak] {
+    display: none;
+}
