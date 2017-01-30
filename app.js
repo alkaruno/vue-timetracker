@@ -17,12 +17,13 @@ new Vue({
         timers: storage.read(),
         newTimer: '',
         activeTimer: null,
-        editedTimer: null
+        editedTimer: null,
+        position: 0
     },
     watch: {
         timers: {
             handler: function (timers) {
-                storage.save(timers)
+                storage.save(timers);
             },
             deep: true
         },
@@ -36,6 +37,27 @@ new Vue({
         this.timers.forEach(function (timer) {
             if (timer.active) {
                 this.activeTimer = timer;
+            }
+        }.bind(this));
+        window.addEventListener('keydown', function (event) {
+            var code = event.keyCode;
+            switch (code) {
+                case 32:
+                    this.clickTimer(this.timers[this.position]);
+                    break;
+                case 74:
+                    this.position = Math.min(this.position + 1, this.timers.length - 1);
+                    break;
+                case 75:
+                    this.position = Math.max(this.position - 1, 0);
+                    break;
+                case 78:
+                    event.preventDefault();
+                    this.$refs.newTimer.focus();
+                    break;
+                case 68:
+                    this.removeTimer(this.timers[this.position]);
+                    break;
             }
         }.bind(this));
         setInterval(this.tick, 250);
@@ -62,6 +84,7 @@ new Vue({
             this.timers.push(timer);
             this.runTimer(timer);
             this.newTimer = '';
+            this.$refs.newTimer.blur();
         },
         clickTimer: function (timer) {
             if (timer === this.activeTimer) {

@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Time Tracker</title>
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400" rel="stylesheet">
     <link href="styles.css" rel="stylesheet">
     <link id="favicon" rel="shortcut icon" type="image/png" href="pause.png">
 </head>
 <body>
 
 <div id="app">
-    <input class="new-timer" autocomplete="off" v-model="newTimer" @keyup.enter="addTimer">
+    <input class="new-timer" autocomplete="off" v-model="newTimer" @keydown.stop @keyup.enter="addTimer" ref="newTimer">
     <ul class="timers" v-cloak>
-        <li v-for="timer in timers" :class="{ active: timer.active, editing: timer == editedTimer }" @click="clickTimer(timer)">
+        <li v-for="(timer, index) in timers" :class="{ active: timer.active, editing: timer == editedTimer, selected: index == position }" @click="clickTimer(timer)">
             <div class="view">
                 <label @dblclick="editTimer(timer)">{{ timer.name }}</label>
                 <button class="delete" @click.stop="removeTimer(timer)"></button>
