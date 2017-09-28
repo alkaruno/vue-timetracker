@@ -82,6 +82,7 @@ new Vue({
                 this.stopTimer(this.activeTimer);
             }
             this.timers.push(timer);
+            this.position = this.timers.length - 1;
             this.runTimer(timer);
             this.newTimer = '';
             this.$refs.newTimer.blur();
@@ -112,6 +113,7 @@ new Vue({
                 this.stopTimer(timer);
             }
             this.timers.splice(this.timers.indexOf(timer), 1);
+            this.position = Math.min(this.position, this.timers.length - 1);
         },
         editTimer: function (timer) {
             this.beforeEditCache = timer.name;
