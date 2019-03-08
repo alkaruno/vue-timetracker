@@ -101,6 +101,7 @@ new Vue({
             timer.active = true;
             this.activeTimer = timer;
             this.activeTimer.lastStart = this.getTime();
+            this.position = this.timers.indexOf(timer);
         },
         stopTimer: function (timer) {
             timer.seconds += this.getTime() - timer.lastStart;
