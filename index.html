@@ -19,13 +19,14 @@
                 <label @dblclick="editTimer(timer)">{{ timer.name }}</label>
                 <button class="delete" @click.stop="removeTimer(timer)"></button>
                 <span class="time">{{ timer.text }}</span>
+                <span class="created">{{ timer.created }}</span>
             </div>
             <input type="text" class="edit" v-model="timer.name" v-timer-focus="timer == editedTimer" @blur="doneEdit(timer)" @keyup.enter="doneEdit(timer)" @keyup.esc="cancelEdit(timer)">
         </li>
     </ul>
 </div>
 
-<script src="https://unpkg.com/vue@2.6.8/dist/vue.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="app.js"></script>
 
 </body>

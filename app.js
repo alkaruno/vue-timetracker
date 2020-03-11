@@ -40,24 +40,23 @@ new Vue({
             }
         }.bind(this));
         window.addEventListener('keydown', function (event) {
-            var code = event.keyCode;
-            switch (code) {
-                case 32:
+            switch (event.code) {
+                case 'Space':
                     this.clickTimer(this.timers[this.position]);
                     break;
-                case 74:
+                case 'KeyJ':
                     this.position = Math.min(this.position + 1, this.timers.length - 1);
                     break;
-                case 75:
+                case 'KeyK':
                     this.position = Math.max(this.position - 1, 0);
                     break;
-                case 78:
+                /*case 'KeyN':
                     event.preventDefault();
                     this.$refs.newTimer.focus();
                     break;
-                case 68:
+                case 'KeyD':
                     this.removeTimer(this.timers[this.position]);
-                    break;
+                    break;*/
             }
         }.bind(this));
         setInterval(this.tick, 250);
@@ -77,7 +76,7 @@ new Vue({
             if (!value) {
                 return;
             }
-            var timer = {name: value, text: '00:00', active: false, seconds: 0, lastStart: null};
+            var timer = {name: value, text: '00:00', active: false, seconds: 0, lastStart: null, created: this.getDateString()};
             if (this.activeTimer !== null) {
                 this.stopTimer(this.activeTimer);
             }
@@ -149,6 +148,13 @@ new Vue({
                 s = '0' + s;
             }
             return h === 0 ? m + ':' + s : h + ':' + m + ':' + s;
+        },
+        getDateString: function () {
+            const now = new Date();
+            return this.appendLeadingZero(now.getDate()) + '.' + this.appendLeadingZero(now.getMonth() + 1) + '.' + now.getFullYear();
+        },
+        appendLeadingZero: function (value) {
+            return value < 10 ? '0' + value : value;
         }
     },
     directives: {
